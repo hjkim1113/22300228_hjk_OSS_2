@@ -1,0 +1,13 @@
+button {
+  border: 0;
+  color: white;
+  padding: 3px 15px;
+}
+
+.add {
+  background-color: blue;
+}
+
+.del {
+  background-color: green;
+}

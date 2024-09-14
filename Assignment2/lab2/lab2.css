@@ -1,0 +1,360 @@
+svg {
+  max-width: 18px;
+  fill: rgba(129, 129, 129, 0.305);
+}
+
+input:focus, select:focus {
+  outline:none;
+}
+
+div [box] {
+  height: 50px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+.top {
+  margin: 14px auto 16px 9px;
+}
+
+.top img {
+  max-width: 95px;
+  opacity: 1.0;
+}
+
+#main {
+  margin-top: 35px;
+  margin-right: 9px;
+  margin-left: 9px;
+  height: 800px;
+}
+
+#ch {
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+#ch p {
+  color: rgb(163, 163, 163);
+  font-size: 13px;
+  float: right;
+  margin: 0;
+  margin-right: 4px;
+}
+
+#ch svg {
+  max-width: 18px;
+  margin: 0;
+  float: right;
+  fill: rgb(49, 211, 37);
+}
+
+#id_pw_em {
+  clear: both;
+  border: 0;
+  margin-bottom: 10px;
+}
+
+#psword, #born, #news, #rad {
+  border: 0.8px solid rgb(199, 199, 199); 
+  border-bottom: 0.4px;
+}
+
+#id, #name {
+  border-radius: 6px 6px 0 0;
+  border: 0.8px solid rgb(199, 199, 199);
+  border-bottom: 0.4px;
+}
+
+#email, #phone {
+  border-radius: 0 0 6px 6px;
+  border: 0.8px solid rgb(199, 199, 199);
+}
+
+#id, #psword, #name, #born, #news, #email, #rad, #phone {
+  clear: both;
+  width: 100%;
+}
+
+#id svg, #lock, #email svg, #name svg, #born svg, #news svg, #phone svg {
+  box-sizing: border-box;
+  float: left;
+  height: 50px;
+  margin: 0 15px;
+}
+
+#id input, #psword input, #email input {
+  box-sizing: border-box;
+  float: left;
+  border: 0;
+  height: 100%;
+  width: calc(100% - 200px);
+  color: rgb(134, 134, 134);
+}
+
+.id_naver {
+  box-sizing: border-box;
+  float: right;
+  height: 50px;
+  color: rgb(163, 163, 163);
+  max-width: 150px;
+  padding: 15px;
+}
+
+#psword input {
+  box-sizing: border-box;
+  float: left;
+  border: 0;
+  height: 100%;
+  width: calc(100% - 150px);
+}
+
+#eye {
+  box-sizing: border-box;
+  float: right;
+  height: 50px;
+  margin: 0 20px;
+}
+
+#email, #phone {
+  clear: both;
+}
+
+#email input, #name input, #news select, #phone input {
+  box-sizing: border-box;
+  float: left;
+  border: 0;
+  min-height: 50px;
+  height: 100%;
+  width: calc(100% - 50px);
+  color: rgb(134, 134, 134);
+}
+
+#name_born {
+  border: 0;
+  margin-bottom: 10px;
+}
+
+#born_p {
+  box-sizing: border-box;
+  float: left;
+  color: rgb(134, 134, 134);
+  padding: 15px 0;
+  font-size: 13px;
+}
+
+#born input {
+  box-sizing: border-box;
+  float: right;
+  border: 0;
+  min-height: 50px;
+  width: calc(100% - 120px);
+  padding: 10px;
+  font-size: 13px;
+  color: rgb(134, 134, 134);
+}
+
+#rad {
+  box-sizing: border-box;
+  clear: both;
+  width: calc(100% + 2px);
+  border: 0.8px solid rgb(199, 199, 199);
+  border-bottom: 0.4px;
+  padding: 4px;
+}
+
+#rad ul {
+  box-sizing: border-box;
+  max-height: 50px;
+  padding: 0;
+  margin: 4px;
+  float: left;
+  border: 0.8px solid rgb(199, 199, 199);
+  border-radius: 6px;
+  width: calc(50% - 8px);
+  height: calc(100% - 8px);
+}
+
+#rad li {
+  float: left;
+  list-style-type: none;
+  font-size: 13px;
+  color: rgb(134, 134, 134);
+  height: 100%;
+  width: calc(50% - 0.5px);
+  text-align: center;
+}
+
+#rad input, #title input, .menuitem input {
+  opacity:0;
+  height: 0;
+  width: 0;
+  margin: 0;
+}
+
+#rdl {
+  border-right: 0.8px solid rgb(199, 199, 199);
+}
+
+#rad li label {
+  float: left;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  width: 100%;
+  height: 100%;
+}
+
+input[type=radio]:checked + label {
+  color: rgb(26, 121, 13);
+  border: 0.8px solid rgb(33, 151, 17);
+}
+
+#cert {
+  clear: both;
+  border: 0.8px solid rgb(199, 199, 199);
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+#cert:after {content:'';display:block;clear:both;}
+
+#title {
+  box-sizing: border-box;
+  height: 50px;
+  border-bottom: 0.4px solid rgb(199, 199, 199);
+}
+
+#chec {
+  box-sizing: border-box;
+  float: left;
+  max-width: 21px;
+  height: 100%;
+  margin: 0 9px 0 15px;
+}
+
+#title label {
+  box-sizing: border-box;
+  height: 100%;
+  float: left;
+  padding: 14px 0;
+  width: calc(100% - 50);
+}
+
+#title input[type=checkbox]:checked + label #chec {
+  fill: rgb(33, 151, 17);
+}
+
+#title em {
+  font-size: small;
+  font-style: normal;
+  color: rgb(33, 151, 17);
+}
+
+#title span {
+  font-size: 15px;
+  font-weight: 550;
+}
+
+#title #arrow {
+  box-sizing: border-box;
+  float: right;
+  height: 50px;
+  margin: 0 15px;
+}
+
+#detail ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 13px;
+}
+
+#detail ul:after {content:'';display:block;clear:both;}
+
+#detail li {
+  margin: 3px 0;
+  float: left;
+  width: 50%;
+}
+
+.blind {
+  box-sizing: border-box;
+  float: left;
+  height: 100%;
+}
+
+.menuitem svg {
+  width: 10px;
+  margin-right: 10px;
+}
+
+#detail label {
+  font-size: small;
+  color: rgb(134, 134, 134);
+}
+
+#detail input[type=checkbox]:checked + label svg {
+  fill: rgb(33, 151, 17);
+}
+
+#adder {
+  clear: both;
+  border: 0.8px solid rgb(199, 199, 199);
+  border-radius: 6px;
+  height: 60px;
+}
+
+#adder input {
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#fbtn {
+  box-sizing: border-box;
+  margin: 9px;
+  height: 50px;
+  width: calc(100% - 18px);
+  background-color: rgb(33, 151, 17);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 6px;
+  border: 0.1px solid rgb(33, 151, 17);
+}
+
+#fbtn span {
+  font-size: 13px;
+}
+
+#id:has(input:focus), #psword:has(input:focus), #name:has(input:focus), #born:has(input:focus), #news:has(select:focus), #email:has(input:focus), #phone:has(input:focus), #adder:has(input:focus) {
+  border: 2px solid rgb(33, 151, 17);
+  width: calc(100% - 2px);
+}
+
+.warning_ul {
+  clear: both;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 8px 0;
+}
+
+.warning {
+  list-style-type: none;
+  color: rgb(255, 58, 58);
+  font-size: small;
+}
+
+#cert_ul {
+  margin-bottom: 10px;
+}

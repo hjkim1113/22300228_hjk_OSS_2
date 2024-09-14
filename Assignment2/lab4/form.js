@@ -14,7 +14,7 @@ add.addEventListener('click', () => {
   var words = input.value.split(',');
   for(let i = 0; i < words.length; i++){
     if(all.indexOf(words[i].trim()) >= 0){
-      alert(`${words[i].trim()}은/는 이미 포함되어있습니다.`);
+      alert(`${words[i].trim()}은(는) 이미 포함되어있습니다.`);
       continue;
     }
     all[leng + i] = words[i].trim();
@@ -22,9 +22,10 @@ add.addEventListener('click', () => {
     li.innerText = words[i].trim();
     ul.appendChild(li);
   }
-  console.log(all);
+  input.value = '';
 });
 
 del.addEventListener('click', () => {
-  window.location.href = "./form.html";
+  all.length = 0;
+  ul.innerHTML = '';
 });
