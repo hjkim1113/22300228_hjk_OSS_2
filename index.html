@@ -3,42 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./in_main.css">
-  <title>22300228 김희준</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="./Assignment2_2/my.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="./Assignment2_2/js/index_main.js"></script>
+  <title>index</title>
 </head>
-<body>
-  <a href="https://github.com/HGU-Coding-Studio/2024-oss-assignment-2-hjkim1113.git">내 클래스룸 리포지토리</a>
-  <a href="https://github.com/hjkim1113/22300228_hjk_OSS_2.git">내 깃허브 리포지토리</a>
-  <a href="https://beamish-tiramisu-f9b18f.netlify.app/">내 사이트</a>
-  <a href="./test/test.html">테스트</a>
-  <br/>
+<body class="d-flex flex-column min-vh-100">
 
-  <h1>Assignment</h1>
-  <ul>
-    <li>
-      <a href="https://resonant-gumption-e3c7bc.netlify.app/">Assignment1</a>
-    </li>
-  </ul>
+  <div id="header"></div>
+  
+  <script>
+    fetch('./header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header').innerHTML = data);
+  </script>
 
+  <div class="border-bottom p-2 mx-2">
+    <span class="fs-5 fw-bold pe-2">List</span>
+    <span class="fs-6" id="length_list"></span>
+    <ul class="nav float-end">
+      <li class="nav-item me-3">
+        <select name="sel_menu" id="search_menu" class="form-select form-select-sm h-100 d-inline-block">
+          <option value="name" selected>이름</option>
+          <option value="email">이메일</option>
+          <option value="phone">전화번호</option>
+          <option value="position">분야</option>
+          <option value="major">전공</option>
+          <option value="join_year">입사년도</option>
+        </select>
+      </li>
+      <li class="nav-item me-3"><input type="text" class="form-control" id="serch_v"></li>
+      <li class="nav-item me-1"><button class="btn btn-outline-secondary py-1 px-2 h-100 d-inline-block" onclick="searchShowList()">검색</button></li>
+      <li class="nav-item me-1"><button class="btn btn-outline-secondary py-1 px-2 h-100 d-inline-block" onclick="reset()">검색 초기화</button></li>
+      <li class="nav-item me-1"><button class="btn btn-success py-1 px-2 h-100 d-inline-block" onclick="location.href = './Assignment2_2/add.html'">추가</button></li>
+    </ul>
+  </div>
 
-  <h1>Assignment2</h1>
-  <ul>
-    <li>
-      <a href="./Assignment2/lab1/form_nostyle.html">과제 2-1</a>
-    </li>
-    <li>
-      <a href="./Assignment2/lab2/form_style.html">과제 2-2</a>
-    </li>
-    <li>
-      <a href="./Assignment2/lab3/form_js.html">과제 2-3</a>
-    </li>
-    <li>
-      <a href="./Assignment2/lab4/form.html">과제 2-4</a>
-    </li>
-  </ul>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">이름</th>
+        <th scope="col">분야</th>
+        <th scope="col">이메일</th>
+        <th scope="col">전화번호</th>
+        <th scope="col">전공</th>
+        <th scope="col">입사 년도</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
+  <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+    <ul class="pagination" id="page_num">
+    </ul>
+  </nav>
+
+  <div id="footer" class="mt-auto"></div>
+  
+  <script>
+    fetch('./footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer').innerHTML = data);
+  </script>
   
 </body>
 </html>
-
-<!-- git push myorigin main  :  사이트용 리포 업로드 명령어 -->
