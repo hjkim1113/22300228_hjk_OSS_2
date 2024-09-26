@@ -2,66 +2,100 @@
 
 let list
 
-function confirm(){
-  fetch('/data.json')
-  .then(response => response.json())
-  .then(data => {
+function confirm_btn(){
 
-    const add_det = {
-      "name":$('#name_v').val(),
-      "email":$('#email_v').val(),
-      "phone":$('#phone_v').val(),
-      "position":$('#position_v').val(),
-      "major":$('#major_v').val(),
-      "join_year":$('#join_year_v').val(),
-      "descrip":$('#descrip_v').val()
-    };
+  if(!validationCheck()){
+    alert('정보를 다시 입력해 주세요.');
+    $('form').on('submit', function(event){
+      event.preventDefault();
+    })
+    return false;
+  }
 
-    list = data;
+  list = JSON.parse(localStorage.getItem('list_all'));
 
-    list[list.length] = add_det;
+  const add_det = {
+    "name":$('#name_v').val(),
+    "email":$('#email_v').val(),
+    "phone":$('#phone_v').val(),
+    "position":$('#position_v').val(),
+    "major":$('#major_v').val(),
+    "join_year":$('#join_year_v').val(),
+    "descrip":$('#descrip_v').val()
+  };
 
+  list[list.length] = add_det;
 
-
-    // 수정된 JSON 데이터를 Blob으로 변환하여 다운로드
-    const jsonString = JSON.stringify(list);
-    const blob = new Blob([jsonString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'data.json';  // 파일 이름을 설정
-    a.click();
-    URL.revokeObjectURL(url);
-
-
-    // const stroageEngine_pop_up = multer.diskStorage({
-    //   destination: (req, file, callback) => {
-    //     callback(null, path.join(__dirname, '../../public/image'))
-    //   },
-    
-    //   filename: (req, file, callback) => {
-    
-    //     callback(null, "pop_up" + path.extname(file.originalname));
-    //   },
-    // });
-    
-    
-    
-    // router.post("/admin/management/pop_up", multer({ storage: stroageEngine_pop_up }).single('pop_up_file'), ctrl.procedure.pop_up);
-
-
-    console.log(list);
-    console.log(add_det);
-    console.log(typeof list);
-  })
-  .catch(error => {
-      console.error('JSON 파일을 불러오는데 분제가 발생했습니다.', error);
-  });
+  localStorage.setItem('list_all', JSON.stringify(list));
 
   alert('게시물이 추가됩니다.');
 }
 
 
-function cancel(){
-  
+function validationCheck(){
+
+  let check = 0;
+
+  // 이름
+  if($('#name_v').val().length < 2){
+    $('#name_v').toggleClass('is-invalid', true);
+    $('#name_v').toggleClass('is-valid', false);
+    check++;
+  } else {
+    $('#name_v').toggleClass('is-invalid', false);
+    $('#name_v').toggleClass('is-valid', true);
+  }
+
+  // 이메일
+  if(!($('#email_v').val()).match('@') || !($('#email_v').val()).match('.')){
+    $('#email_v').toggleClass('is-invalid', true);
+    $('#email_v').toggleClass('is-valid', false);
+    check++;
+  } else {
+    $('#email_v').toggleClass('is-invalid', false);
+    $('#email_v').toggleClass('is-valid', true);
+  }
+
+  // 전화번호
+  if(!(/^(070|02|0[0-9][0-9])-\d{3,4}-\d{4}$/.test($('#phone_v').val()))){
+    $('#phone_v').toggleClass('is-invalid', true);
+    $('#phone_v').toggleClass('is-valid', false);
+    check++;
+  } else {
+    $('#phone_v').toggleClass('is-invalid', false);
+    $('#phone_v').toggleClass('is-valid', true);
+  }
+
+  // 분야
+  if(!$('#position_v').val()){
+    $('#position_v').toggleClass('is-invalid', true);
+    $('#position_v').toggleClass('is-valid', false);
+    check++;
+  } else {
+    $('#position_v').toggleClass('is-invalid', false);
+    $('#position_v').toggleClass('is-valid', true);
+  }
+
+  // 전공
+  if(!$('#major_v').val()){
+    $('#major_v').toggleClass('is-invalid', true);
+    $('#major_v').toggleClass('is-valid', false);
+    check++;
+  } else {
+    $('#major_v').toggleClass('is-invalid', false);
+    $('#major_v').toggleClass('is-valid', true);
+  }
+
+  // 입사년도
+  if(!$('#join_year_v').val() || !(/^\d{4}$/.test($('#join_year_v').val()))){
+    $('#join_year_v').toggleClass('is-invalid', true);
+    $('#join_year_v').toggleClass('is-valid', false);
+    check++;
+  } else {
+    $('#join_year_v').toggleClass('is-invalid', false);
+    $('#join_year_v').toggleClass('is-valid', true);
+  }
+
+  if(check == 0) return true;
+  return false;
 }
