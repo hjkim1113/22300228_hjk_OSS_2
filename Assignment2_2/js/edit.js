@@ -48,7 +48,7 @@ function confirm_btn(){
     })
     return false;
   }
-
+  location.href = "/";
 }
 
 

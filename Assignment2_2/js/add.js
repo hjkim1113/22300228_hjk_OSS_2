@@ -29,6 +29,7 @@ function confirm_btn(){
   localStorage.setItem('list_all', JSON.stringify(list));
 
   alert('게시물이 추가됩니다.');
+  location.href = "/";
 }
 
 
