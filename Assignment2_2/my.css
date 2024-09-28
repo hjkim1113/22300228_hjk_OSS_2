@@ -2,6 +2,9 @@
   .year_hide {
     display: none;
   }
+  #header_inner {
+    max-width: 500px;
+  }
 }
 
 @media only screen and (max-width: 665px) {
