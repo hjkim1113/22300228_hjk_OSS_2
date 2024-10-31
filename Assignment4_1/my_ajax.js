@@ -1,77 +1,210 @@
-$(document).ready(function() {
-  console.log('ready!');
-  $('#hide').click(function() {
-    $(this).hide();
-  });
-});
+let number = 0;
+let selected_info;
+let id_set = [];
 
-function hd2(){
-  $('#hide2').css({'display':'none'});
-}
-//animate
-
-var index;
-
+active_check();
 get();
 
+function set_num(numb){
+  number = numb;
+  active_check();
+}
+
+function select_btn(row){
+  selected_info = JSON.parse(row.getAttribute('data-element'));
+  number = 1;
+  active_check(selected_info);
+  console.log(selected_info.id + " hi");
+}
+
+function active_check(element_info) {
+  switch(number){
+    case 0 :
+      selected_info = {};
+      $('#add_btn').css("display","inline");
+      $('#delete_btn').css("display","none");
+      $('#submit_btn').css("display","none");
+      $('#change_title').text("데이터 추가하기");
+      $('#add_page').addClass('active');
+      $('#adit_page').removeClass('active');
+      break;
+    case 1 :
+      $('#name_v').val(element_info.name);
+      $('#email_v').val(element_info.email);
+      $('#phone_v').val(element_info.phone);
+      $('#position_v').val(element_info.position);
+
+      $('#add_btn').css("display","none");
+      $('#delete_btn').css("display","inline");
+      $('#submit_btn').css("display","inline");
+      $('#change_title').text("데이터 편집/삭제하기");
+      $('#adit_page').addClass('active');
+      $('#add_page').removeClass('active');
+      break;
+  }
+}
+
+function create_id(){
+  let ret;
+  while(true){
+    ret = ret = Math.floor(Math.random() * (99999 - 1 + 1)) + 1;
+    if(id_set.indexOf(ret) == -1){
+      break;
+    }
+  }
+  return ret;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 function get(){
-  $('#demo').html('');
+  let count = 1;
+  $('tbody').html('');
   const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "https://beamish-tiramisu-f9b18f.netlify.app/my_data.json");
+  xhttp.open("GET", "http://localhost:3000/people");
   xhttp.setRequestHeader("context-type", "application/json");
   xhttp.send();
   xhttp.onload = () => {
     if(xhttp.status == 200){
       let stu = JSON.parse(xhttp.response);
-      index = stu.length;
+      id_set = []
       stu.forEach(element => {
-        $('#demo').append('<div>' + element.name + " " + element.email + "<br>");
+        $('tbody').append(
+          `<tr data-element='${JSON.stringify(element)}' onclick="select_btn(this)">
+            <th scope="row">${count}</th>
+            <td>${element.name}</td>
+            <td>${element.position}</td>
+            <td class="email_hide">${element.email}</td>
+            <td>${element.phone}</td>
+          </tr>`
+        );
+        id_set.push(element.id);
+        count++;
       });
-      
+      $('#total').text(`${stu.length}명`);
     }
   }
 }
 
-// {
-//   "name":"문지훈",
-//   "email":"jihunmoon@gmail.com",
-//   "phone":"010-0123-4567",
-//   "position":"AI전문가",
-//   "major":"컴퓨터 공학",
-//   "join_year":"2024",
-//   "descrip":"문지훈은 2024년에 입사한 AI 전문가로, 딥러닝 및 머신러닝 알고리즘 연구에 기여하며, 회사의 AI 솔루션 개발에 큰 역할을 하고 있습니다."
-// }
-
-
 function put(){
+  if(!validationCheck()){
+    alert('정보를 다시 입력해 주세요.');
+    return;
+  }
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "https://beamish-tiramisu-f9b18f.netlify.app/my_data.json");
+  xhttp.open("POST", "http://localhost:3000/people");
   xhttp.setRequestHeader("context-type", "application/json;chatset=UTF-8");
-  const data = {id: `${index + 1}`, name: `${$('#name_i').val()}`, age: $('#age_i').val()};
+  const data = {id: `${create_id()}`, name: $('#name_v').val(), email: $('#email_v').val(), phone: $('#phone_v').val(), position: $('#position_v').val()};
   xhttp.send(JSON.stringify(data));
   xhttp.onload = () => {
     if (xhttp.status === 200) {
-      console.log('성공');
+      alert('추가되었습니다.')
+      get();
     }
   }
 }
 
 
 function update(){
-  $('#demo').html('');
-  const id_i = $('#num_i').val();
-  console.log($('#num_i').val());
-  console.log($('#name_i').val());
-  console.log($('#age_i').val());
-
+  if(!validationCheck()){
+    alert('정보를 다시 입력해 주세요.');
+    return;
+  }
   const xhttp = new XMLHttpRequest();
-  xhttp.open("PUT", "https://beamish-tiramisu-f9b18f.netlify.app/my_data.json" + id_i);
+  xhttp.open("PUT", "http://localhost:3000/people/" + selected_info.id);
   xhttp.setRequestHeader("context-type", "application/json;chatset=UTF-8");
-  const data = {name: `${$('#name_i').val()}`, age: $('#age_i').val()};
+  const data = {id: selected_info.id, name: $('#name_v').val(), email: $('#email_v').val(), phone: $('#phone_v').val(), position: $('#position_v').val()};
   xhttp.send(JSON.stringify(data));
   xhttp.onload = () => {
     if(xhttp.status == 200){
+      alert('수정되었습니다.')
       get();
     }
   }
+}
+
+function delete_el(){
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("DELETE", "http://localhost:3000/people/" + selected_info.id);
+  xhttp.setRequestHeader("context-type", "application/json;chatset=UTF-8");
+  xhttp.send();
+  xhttp.onload = () => {
+    if(xhttp.status == 200){
+      alert('삭제되었습니다.')
+      get();
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function validationCheck(){
+  let check = 0;
+
+  // 이름
+  if($('#name_v').val().length < 2){
+    $('#name_v').toggleClass('is-invalid', true);
+    $('#name_v').toggleClass('is-valid', false);
+    check++;
+  } else {
+    $('#name_v').toggleClass('is-invalid', false);
+    $('#name_v').toggleClass('is-valid', true);
+  }
+
+  // 이메일
+  if(!$('#email_v').val().match('@') || !$('#email_v').val().match('.')){
+    $('#email_v').toggleClass('is-invalid', true);
+    $('#email_v').toggleClass('is-valid', false);
+    check++;
+  } else {
+    $('#email_v').toggleClass('is-invalid', false);
+    $('#email_v').toggleClass('is-valid', true);
+  }
+
+  // 전화번호
+  if(!(/^(070|02|0[0-9][0-9])-\d{3,4}-\d{4}$/.test($('#phone_v').val()))){
+    $('#phone_v').toggleClass('is-invalid', true);
+    $('#phone_v').toggleClass('is-valid', false);
+    check++;
+  } else {
+    $('#phone_v').toggleClass('is-invalid', false);
+    $('#phone_v').toggleClass('is-valid', true);
+  }
+
+  // 분야
+  if(!$('#position_v').val()){
+    $('#position_v').toggleClass('is-invalid', true);
+    $('#position_v').toggleClass('is-valid', false);
+    check++;
+  } else {
+    $('#position_v').toggleClass('is-invalid', false);
+    $('#position_v').toggleClass('is-valid', true);
+  }
+
+  if(check == 0) return true;
+  return false;
 }
