@@ -49,21 +49,12 @@ function create_id(){
   while(true){
     ret = ret = Math.floor(Math.random() * (99999 - 1 + 1)) + 1;
     if(id_set.indexOf(ret) == -1){
+      id_set.push(ret);
       break;
     }
   }
   return ret;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -76,6 +67,12 @@ function get(){
   xhttp.send();
   xhttp.onload = () => {
     if(xhttp.status == 200){
+      if(number == 0){
+        $('#name_v').val('');
+        $('#email_v').val('');
+        $('#phone_v').val('');
+        $('#position_v').val('');
+      }
       let stu = JSON.parse(xhttp.response);
       id_set = []
       stu.forEach(element => {
@@ -107,7 +104,7 @@ function put(){
   const data = {id: `${create_id()}`, name: $('#name_v').val(), email: $('#email_v').val(), phone: $('#phone_v').val(), position: $('#position_v').val()};
   xhttp.send(JSON.stringify(data));
   xhttp.onload = () => {
-    if (xhttp.status === 200) {
+    if (xhttp.status == 200) {
       alert('추가되었습니다.')
       get();
     }
@@ -145,21 +142,6 @@ function delete_el(){
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function validationCheck(){
